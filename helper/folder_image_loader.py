@@ -2,13 +2,17 @@ import os
 from skimage import io
 from helper.face_detection import detect_faces
 from PIL import Image
+import pathlib
 
 
 def load_image_folder(number):
     training_path = "../data/raw/Training/{}"
     training_file_path = "../data/raw/Training/{}/{}"
     observation_folder_path = training_path.format(number)
-    filenames = os.listdir(observation_folder_path)
+    filenames = []
+    for file in os.listdir(observation_folder_path):
+        if pathlib.Path(file).suffix in ['.jpg', 'jpeg', '.png']:
+            filenames.append(file)
     images_path_inside_folder = [
         training_file_path.format(number, filename) for filename in
         filenames]
