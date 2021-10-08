@@ -12,8 +12,7 @@ def image_clustering(list_face_image: List):
                                   list_encoded_face]
     dbscan_cluster = DBSCAN(min_samples=2)
     dbscan_cluster.fit(list_encoded_face_filtered)
-    mode_label = stats.mode( np.array(dbscan_cluster.labels_)[dbscan_cluster.labels_ != -1])[0][0]
+    not_outlier_labels = np.array(dbscan_cluster.labels_)[dbscan_cluster.labels_ != -1]
+    mode_label = stats.mode(not_outlier_labels)[0][0]
     filtered_label = [label == mode_label and mode_label != -1 for label in dbscan_cluster.labels_]
     return np.array(list_face_image)[filtered_label]
-
-
