@@ -1,4 +1,7 @@
 import dlib
+import os
+from skimage import io
+from PIL import Image
 
 
 def detect_faces(image):
@@ -11,3 +14,4 @@ def detect_faces(image):
                     x.right(), x.bottom()) for x in detected_faces]
 
     return face_frames
+
